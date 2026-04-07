@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title>My App</title>
+</head>
+<body>
+  <h1>Hello, Apps Script!</h1>
+  <p id="user"></p>
+
+  <script>
+    google.script.run
+      .withSuccessHandler(function(data) {
+        document.getElementById('user').textContent = 'Logged in as: ' + data.user;
+      })
+      .getAppData();
+  </script>
+</body>
+</html>
