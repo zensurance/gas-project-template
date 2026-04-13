@@ -53,7 +53,7 @@ export default [
       'no-extend-native': 'error',
       'no-alert': 'warn',
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_|^e$' }],
-      'no-undef': 'error',
+      'no-undef': 'warn',  // warn, not error — GAS cross-file functions trigger false positives
       'eqeqeq': ['warn', 'always', { null: 'ignore' }],
     },
   },
