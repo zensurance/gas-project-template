@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
 
@@ -54,3 +57,10 @@ jobs:
 
       - name: Push to Apps Script
         run: clasp push --force
+
+      - name: Create version and update deployment
+        run: |
+          VERSION=$(clasp version "CI deploy $(date +%Y-%m-%d_%H:%M)" 2>&1 | grep -oP 'Created version \K\d+')
+          echo "Created version $VERSION"
+          clasp deploy -V "$VERSION" -i "${{ secrets.DEPLOYMENT_ID }}" -d "CI deploy v$VERSION"
+          echo "Deployment updated to version $VERSION"
